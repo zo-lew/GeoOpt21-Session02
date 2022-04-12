@@ -2,12 +2,12 @@
 
 Python - Hops workflow
 
-1 - simpleApp
-2 - multiFunction
-3 - dataMgmt
-4 - complexApp
-5 - rhino3dm
-6 - networkx
+1. - simpleApp
+2. - multiFunction
+3. - dataMgmt
+4. - complexApp
+5. - rhino3dm
+6. - networkx
 
 Requirements:
 pip3.10 install networkx
