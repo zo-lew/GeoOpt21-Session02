@@ -11,21 +11,21 @@ hops = hs.Hops(app)
     Hops Outputs should match the number of items that the functions returns 
 """
 
+
 @hops.component(
     "/mycomponent",
     name = "MyComponent",
     inputs=[
-        hs.HopsInteger("N1" ),
-        hs.HopsInteger("Second Number", "N2", "Second Value", hs.HopsParamAccess.ITEM, default= 10)
-
+        hs.HopsString("Name", "N", "Provide your name"),
+        hs.HopsInteger("Age", "A", "Provide your age")
     ],
     outputs=[
-       hs.HopsInteger("Sum Result","S","Result of the sum")
+       hs.HopsString("Text","T","Print name and age")
     ]
 )
-def MyComponent(num1, num2):
-    sum = num1 + num2
-    return sum
+def printNameAndAge(name, age):
+    text= "My name is {} and I am {} years old".format(name, age)
+    return text
 
 
 
