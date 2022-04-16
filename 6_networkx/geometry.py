@@ -20,7 +20,7 @@ def addRandomWeigrhs(G):
     
     return NG
 
-def getNodes(G, layout = 0):
+def getNodes(G, layout = 1):
 
     if layout == 0 : lay =  nx.kamada_kawai_layout(G)
     elif layout == 1 : lay =  nx.circular_layout(G)
@@ -36,7 +36,7 @@ def getNodes(G, layout = 0):
     return nodes
 
 
-def getEdges(G, layout = 0):
+def getEdges(G, layout = 1):
 
     if layout == 0 : lay =  nx.kamada_kawai_layout(G)
     elif layout == 1 : lay =  nx.circular_layout(G)
