@@ -2,19 +2,15 @@
 import random as r
 import rhino3dm as rg
 
-def createRandomPoints(count,rX, rY):
+def CreateBox(Xdimension,Ydimension,Zdimension):
 
-    randomPts = []
-    for i in range(count):
+    extrusions = []
+    
+    for i in range(nS):
+        vector =  rg.Vector3d(0,0,sH*i)
+        base = rg.Extrusion.Create(baseGeom, sH, True)
+        baseCopy = base.Duplicate()
+        baseCopy.Translate(vector)
+        extrusions.append(baseCopy)
 
-        #in each itereation generate some random points
-        random_x = r.uniform(-rX, rX)
-        random_y = r.uniform(-rY, rY)
-
-        #create a point with rhino3dm
-        random_pt = rg.Point3d(random_x, random_y, 0)
-        
-        #add point to the list
-        randomPts.append(random_pt)
-
-    return randomPts
+    return extrusions
