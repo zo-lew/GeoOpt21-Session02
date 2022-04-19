@@ -1,9 +1,6 @@
 from flask import Flask
 import ghhops_server as hs
 
-#notice, we import another file as a library
-import geometry as geo
-
 #we also import random library to generate some randomness 
 import random as r
 
@@ -15,24 +12,22 @@ hops = hs.Hops(app)
 
 
 @hops.component(
-    "/createBox",
-    name = "Create Box",
+    "/createExtruder",
+    name = "Create Extruder",
     inputs=[
-        hs.HopsNumber("Xdimension", "X", "X dimension length", hs.HopsParamAccess.ITEM),
-        hs.HopsNumber("Ydimension", "Y", "Y dimension length", hs.HopsParamAccess.ITEM),
-        hs.HopsNumber("Zdimension", "Z", "Z dimension length", hs.HopsParamAccess.ITEM)
+        hs.HopsCurve("Curve", "C", "closed NURBS curve", hs.HopsParamAccess.ITEM),
+        hs.HopsInteger("geometry height", "H", "geometry height", hs.HopsParamAccess.ITEM),
 
     ],
     outputs=[
-       hs.HopsBrep("mass","Bx","A very basic box", hs.HopsParamAccess.LIST)
+       hs.HopsBrep("mass","Geo","Extrusion of Curve", hs.HopsParamAccess.LIST)
     ]
 )
 
-def CreateBox(Xdimension,Ydimension,Zdimension):
+def createExtruder(curve: rg.Geometry, height: float):
 
-    bx = rg.createBox(Xdimension, Ydimension, Zdimension)
-    return bx
-
+    geo = rg.Geometry(curve, height) 
+    return geo.ToBrep(True, True)
 
 
 if __name__== "__main__":
