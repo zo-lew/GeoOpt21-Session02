@@ -22,9 +22,9 @@ def addRandomWeigrhs(G):
 
 def getNodes(G, layout = 1):
 
-    if layout == 0 : lay =  nx.kamada_kawai_layout(G)
-    elif layout == 1 : lay =  nx.circular_layout(G)
-    elif layout == 2 : lay =  nx.shell_layout(G)
+    if layout == 0 : lay =  nx.random_layout(G)
+    elif layout == 1 : lay =  nx.spectral_layout(G)
+    elif layout == 2 : lay =  nx.spring_layout(G)
     else: lay = nx.planar_layout(G)
 
     nodes = []
@@ -37,9 +37,9 @@ def getNodes(G, layout = 1):
 
 def getEdges(G, layout = 1):
 
-    if layout == 0 : lay =  nx.kamada_kawai_layout(G)
-    elif layout == 1 : lay =  nx.circular_layout(G)
-    elif layout == 2 : lay =  nx.shell_layout(G)
+    if layout == 0 : lay =  nx.random_layout(G)
+    elif layout == 1 : lay =  nx.spectral_layout(G)
+    elif layout == 2 : lay =  nx.spring_layout(G)
     else: lay = nx.planar_layout(G)
 
     edges = []
