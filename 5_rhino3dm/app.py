@@ -1,10 +1,8 @@
+#importing flask and hops to create a workflow
 from flask import Flask
 import ghhops_server as hs
 
-#we also import random library to generate some randomness 
-import random as r
-
-#finally we bring rhino3dm to create rhino geometry in python
+#importing rhino3dm to create rhino geometry in python
 import rhino3dm as rg
 
 app = Flask(__name__)
@@ -20,7 +18,7 @@ hops = hs.Hops(app)
 
     ],
     outputs=[
-       hs.HopsBrep("mass","Geo","Extrusion of Curve", hs.HopsParamAccess.LIST)
+       hs.HopsBrep("Geometry","Geo","Extrusion of Curve", hs.HopsParamAccess.LIST)
     ]
 )
 
