@@ -4,8 +4,8 @@ import ghhops_server as hs
 #notice, we import another file as a library
 import geometry as geo
 
-#we also import random library to generate some randomness 
-import random as r
+#we also import box library 
+import box as b
 
 #finally we bring rhino3dm to create rhino geometry in python
 import rhino3dm as rg
@@ -15,57 +15,34 @@ hops = hs.Hops(app)
 
 
 @hops.component(
-    "/createRandomPoints",
-    name = "Create Random Points",
+    "/createBox",
+    name = "Create Box",
     inputs=[
-        hs.HopsInteger("Count", "C", "Number of Random Points", hs.HopsParamAccess.ITEM, default= 1),
-        hs.HopsNumber("X range of randomness", "X", "Maximum randomness in X directon", hs.HopsParamAccess.ITEM),
-        hs.HopsNumber("Y range of randomness", "Y", "Maximum randomness in Y directon", hs.HopsParamAccess.ITEM)
+        hs.HopsNumber("X Box dimension", "X", "length in X direction", hs.HopsParamAccess.ITEM, default= 1),
+        hs.HopsNumber("Y Box dimension", "Y", "width in Y direction", hs.HopsParamAccess.ITEM, default= 1),
+        hs.HopsNumber("Z Box dimension", "Z", "height in Z direction", hs.HopsParamAccess.ITEM, default= 1)
 
     ],
     outputs=[
-       hs.HopsPoint("Random Points","RP","List of generated random points ", hs.HopsParamAccess.LIST)
+       hs.HopsPoint("Box","Boxy","Boxxy ", hs.HopsParamAccess.LIST)
     ]
 )
-def createRandomPoints(count,rX, rY):
-
-    randomPts = []
+def createBox(bX,bY,bZ):
+    createBx = []
     for i in range(count):
 
-        #in each itereation generate some random points
-        random_x = r.uniform(-rX, rX)
-        random_y = r.uniform(-rY, rY)
+       #in each itereation generate some random points
+        box_x = b.uniform(-bX, bX)
+        box_y = b.uniform(-bY, bY)
+        box_z = b.uniform(-bZ, bZ)
 
         #create a point with rhino3dm
         random_pt = rg.Point3d(random_x, random_y, 0)
         
-        #add point to the list
-        randomPts.append(random_pt)
+       #add point to the list
+        createBx.append(random_pt)
 
-    return randomPts
-
-
-
-@hops.component(
-    "/moreRandomPoints",
-    name = "More Random Points",
-    inputs=[
-        hs.HopsInteger("Count", "C", "Number of Random Points", hs.HopsParamAccess.ITEM, default= 1),
-        hs.HopsNumber("X range of randomness", "X", "Maximum randomness in X directon", hs.HopsParamAccess.ITEM),
-        hs.HopsNumber("Y range of randomness", "Y", "Maximum randomness in Y directon", hs.HopsParamAccess.ITEM)
-
-    ],
-    outputs=[
-       hs.HopsPoint("Random Points","RP","List of generated random points ", hs.HopsParamAccess.LIST)
-    ]
-)
-def moreRandomPoints(count,rX, rY):
-
-    randomPts = geo.createRandomPoints(count, rX, rY)
-    return randomPts
-
-
-
+    return createBx
 
 
 if __name__== "__main__":
