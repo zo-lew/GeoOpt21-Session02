@@ -1,6 +1,3 @@
-#Zoé Lewis - Session 02, Asign 1, Task 1 
-#AIA-Geo-Opt, MaCAD 2022, IAAC
-
 from flask import Flask
 import ghhops_server as hs
 
@@ -15,25 +12,44 @@ hops = hs.Hops(app)
 
 
 @hops.component(
-    "/createExtruder",
+    "/createExtrusion",
     name = "Create Extruder",
     inputs=[
         hs.HopsCurve("Curve", "C", "closed NURBS curve", hs.HopsParamAccess.ITEM),
         hs.HopsInteger("geometry height", "H", "geometry height", hs.HopsParamAccess.ITEM),
-
     ],
     outputs=[
       hs.HopsBrep("Geometry","Geo","Extrusion of Curve", hs.HopsParamAccess.LIST),
     ]
 )
-def CreateExtruder(baseCrv,nH):
+def CreateExtruder(baseCrv, nH):
+
+    base = rg.Extrusion.Create(baseCrv, nH, cap=True)
+        
+    return base
+
+
+
+@hops.component(
+    "/createExtrusions",
+    name = "Create Extruder",
+    inputs=[
+        hs.HopsCurve("Curve", "C", "closed NURBS curve", hs.HopsParamAccess.LIST),
+        hs.HopsInteger("geometry height", "H", "geometry height", hs.HopsParamAccess.ITEM),
+    ],
+    outputs=[
+      hs.HopsBrep("Geometry","Geo","Extrusion of Curve", hs.HopsParamAccess.LIST),
+    ]
+)
+def CreateExtruder(baseCrvs,nH):
     extrusions = []
 
-    for item in range(baseCrv):
+    for i in range(len(baseCrvs)):
 
         #extrude the curve
-        base = rg.Extrusion.Create(baseCrv, nH, cap=True)
-        
+        base = rg.Extrusion.Create(baseCrvs[i], nH, cap=True)
+        extrusions.append(base)
+
     return extrusions
 
 
